@@ -1,2 +1,9 @@
-package online.gemfpt.BE.model;public class AccountResponse {
+package online.gemfpt.BE.model;
+
+import lombok.Data;
+import online.gemfpt.BE.Entity.Account;
+
+@Data
+public class AccountResponse extends Account {
+    String token;
 }

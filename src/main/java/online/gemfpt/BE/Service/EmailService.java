@@ -1,10 +1,9 @@
-package mail.service;
+package online.gemfpt.BE.Service;
 
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
-import mail.dto.EmailDetail;
+import online.gemfpt.BE.model.EmailDetail;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
@@ -23,7 +22,7 @@ public class EmailService {
         try{
             Context context = new Context();
 
-            context.setVariable("name", "Gia Bảo");
+            context.setVariable("name", "Bảo K");
 
             String text = templateEngine.process("emailtemplate", context);
 
