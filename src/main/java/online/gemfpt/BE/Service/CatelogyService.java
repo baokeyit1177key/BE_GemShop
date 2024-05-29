@@ -17,7 +17,7 @@ public class CatelogyService {
     @Autowired
     CatelogyRepository CatelogyRepository;
 
-    public Catelogy create(CatelogyRequest catelogyRequest) {
+    public Catelogy create /* sreate category*/ (CatelogyRequest catelogyRequest) {
         Catelogy catelogy = new Catelogy();
         catelogy.setName(catelogyRequest.getName());
         catelogy.setPrice(catelogyRequest.getPrice());

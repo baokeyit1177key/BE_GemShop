@@ -2,7 +2,6 @@ package online.gemfpt.BE.config;
 
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
-import jakarta.security.auth.message.AuthException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -10,6 +9,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import lombok.ToString;
 import online.gemfpt.BE.Entity.Account;
 import online.gemfpt.BE.Service.TokenService;
+import online.gemfpt.BE.exception.AuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
