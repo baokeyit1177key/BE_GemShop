@@ -32,11 +32,11 @@ public class AuthenticationAPI {
     }
 
 
-    @GetMapping("Admin_only")
+    @GetMapping("admin_only")
     @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity getAdmin(){return  ResponseEntity.ok("ok");}
 
-    @PostMapping("Register")
+    @PostMapping("register")
     public ResponseEntity Register (@RequestBody RegisterRequest responseRequest){
         Account  account = authenticationService.register(responseRequest);
         return  ResponseEntity.ok(account);
@@ -49,7 +49,7 @@ public class AuthenticationAPI {
         emailDetail.setMsgBody("aaa");
         emailService.sendMailTemplate(emailDetail);
     }
-    @GetMapping("GetAll")
+    @GetMapping("getAll")
     public ResponseEntity Getallaccount (){
         List<Account> account = authenticationService.all();
         return  ResponseEntity.ok(account);
