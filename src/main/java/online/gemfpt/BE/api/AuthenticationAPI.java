@@ -5,9 +5,7 @@ import online.gemfpt.BE.Repository.AuthenticationRepository;
 import online.gemfpt.BE.Service.AuthenticationService;
 import online.gemfpt.BE.Service.EmailService;
 import online.gemfpt.BE.Service.ProductServices;
-import online.gemfpt.BE.model.EmailDetail;
-import online.gemfpt.BE.model.LoginRequest;
-import online.gemfpt.BE.model.RegisterRequest;
+import online.gemfpt.BE.model.*;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -26,6 +24,11 @@ public class AuthenticationAPI {
     AuthenticationService authenticationService;
     @Autowired
     EmailService emailService;
+
+    @PostMapping("/login-google")
+    public ResponseEntity<AccountResponse> loginGoogle (LoginGoogleRequest loginGoogleRequest){
+        return ResponseEntity.ok(authenticationService.loginGoogle(loginGoogleRequest));
+    }
 
     @GetMapping("test")
     public ResponseEntity test() {

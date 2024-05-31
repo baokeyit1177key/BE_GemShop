@@ -1,8 +1,11 @@
 package online.gemfpt.BE.Service;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseToken;
 import online.gemfpt.BE.Entity.Account;
 import online.gemfpt.BE.Repository.AuthenticationRepository;
 import online.gemfpt.BE.model.AccountResponse;
+import online.gemfpt.BE.model.LoginGoogleRequest;
 import online.gemfpt.BE.model.LoginRequest;
 import online.gemfpt.BE.model.RegisterRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,21 +16,24 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
+import java.util.SortedMap;
 
 @Service
 
 public class AuthenticationService implements UserDetailsService {
 // xu ly logic
+
     @Autowired
     AuthenticationManager authenticationManager;
+
     @Autowired
     AuthenticationRepository authenticationRepository;
+
     @Autowired
     TokenService tokenService;
+
     @Autowired
     PasswordEncoder passwordEncoder;
 
@@ -61,6 +67,30 @@ public class AuthenticationService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String phone) throws UsernameNotFoundException {
         return authenticationRepository.findAccountByPhone(phone) ;
+    }
+
+    public AccountResponse loginGoogle (LoginGoogleRequest loginGoogleRequest){
+        AccountResponse accountResponse= new AccountResponse();
+        try{
+            FirebaseToken firebaseToken = FirebaseAuth.getInstance().verifyIdToken(loginGoogleRequest.getToken());
+            String email  = firebaseToken.getEmail();
+            Account account = authenticationRepository.findByEmail(email);
+            if (account == null ){
+                account.setName(firebaseToken.getName());
+
+                authenticationRepository.save(account);
+            }
+            accountResponse.setEmail(account.getEmail());
+            accountResponse.setId(account.getId());
+            accountResponse.setName(account.getName());
+            String token = tokenService.generateToken(account);
+            accountResponse.setToken(token);
+        } catch (Exception e){
+            System.out.println(e);
+
+
+        }
+        return accountResponse;
     }
 
 }

@@ -23,7 +23,8 @@ public class ProductServices {
         product.setPriceRate(productsRequest.getPriceRate());
         product.setStock(productsRequest.getStock());
         product.setUrl(productsRequest.getUrl());
-
+        product.setCreateTime(productsRequest.getCreateTime());
+        product.setStatus(productsRequest.getStatus());
 
         return productsRepository.save(product);
     }

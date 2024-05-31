@@ -16,6 +16,19 @@ import java.util.List;
 @Setter
 @ToString
 public class Account implements UserDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    long id;
+
+    @Column (unique = true)
+    String phone ;
+    String password;
+    boolean status = false; // note
+    @Column(unique = true)
+    private String email;
+    String role ;
+    String name;
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of();
@@ -47,13 +60,5 @@ public class Account implements UserDetails {
         return true;
     }
 
-    @Id
-            @GeneratedValue(strategy = GenerationType.IDENTITY)
-    long id;
 
-    @Column (unique = true)
-    String phone ;
-
-
-    String password;
 }
