@@ -4,6 +4,7 @@ import online.gemfpt.BE.Entity.Account;
 import online.gemfpt.BE.Repository.AuthenticationRepository;
 import online.gemfpt.BE.Service.AuthenticationService;
 import online.gemfpt.BE.Service.EmailService;
+import online.gemfpt.BE.Service.ProductServices;
 import online.gemfpt.BE.model.EmailDetail;
 import online.gemfpt.BE.model.LoginRequest;
 import online.gemfpt.BE.model.RegisterRequest;
@@ -60,6 +61,7 @@ public class AuthenticationAPI {
         Account account = authenticationService.login(loginRequest);
         return ResponseEntity.ok(account);
     }
+
 
 
 
